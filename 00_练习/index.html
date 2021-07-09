@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>井字棋</title>
+</head>
+
+<body>
+    <!-- 准备好好一个“容器” -->
+    <div id="test">
+        <ShoppingList name="TEST"/>
+    </div>
+
+    <!-- 引入react核心库 -->
+    <script src="../plug/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script src="../plug/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../plug/babel.min.js"></script>
+    <script src="src/main.js"></script>
+    <script type="text/babel">/*写babel*/
+        class ShoppingList extends React.Component {
+            render() {
+                return (
+                    <div className="shopping-list">
+                        <h1>Shopping List for {this.props.name}</h1>
+                        <ul>
+                            <li>Instagram</li>
+                            <li>WhatsApp</li>
+                            <li>Oculus</li>
+                        </ul>
+                    </div>
+                );
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

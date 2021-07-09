@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsx的语法规则</title>
+    <style>
+        h1.tittle {
+            background-color: coral;
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 准备好好一个“容器” -->
+    <div id="test">
+
+    </div>
+
+    <!-- 引入react核心库 -->
+    <script src="../plug/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script src="../plug/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../plug/babel.min.js"></script>
+
+    <script type="text/babel">/*写babel*/
+        // 1.创建类式组件
+        class Weather extends React.Component{
+            constructor(props){
+                console.log("构造器被调用");
+                super(props)
+                this.state = {
+                    cen:31,
+                    address:"北京",
+                    weather:"晴",
+                    type:"weatherforcast"
+                }
+                //解决changeWeather中this的指向问题,由于babel解析使用严格模式, 
+                //所以导致了changeWeather方法中this指向为空
+                this.newDefined = this.changeWeather.bind(this)
+            }
+            render(){
+                console.log("render渲染调用");
+                // console.log(this.state);
+                let {cen,address,weather,type} = this.state
+                // console.log(cen+address+weather+type);
+                return <h2 onClick={this.newDefined}>{address} 天气:{weather} 气温:{cen}℃ </h2>
+            }
+            changeWeather(){
+                //changeWeather放在哪里?weather的原型对象上,  供实例使用
+                // 通过Weather实例调用changeWeather时,changeWeather中的this就是Weather实例
+                // console.log("chagenWeather");
+                // console.log(this.state.address);
+                // 获取原来的address的值
+                const ads = this.state.address
+                
+                // 状态无法直接更改, 必须借助继承自React.Component中的方法setState()进行更新.
+                // 注意是合并不是替换
+                
+                if(ads == "北京"){
+                    this.setState({address:"天津"})
+                }else{
+                    this.setState({address:"北京"})
+                }
+            }
+        }
+
+        // 2.渲染组件到页面
+        ReactDOM.render(<Weather/>,document.getElementById("test"))
+
+    </script>
+</body>
+
+</html>

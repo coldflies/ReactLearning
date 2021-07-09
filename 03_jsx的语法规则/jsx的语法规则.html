@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsx的语法规则</title>
+    <style>
+        h1.tittle {
+            background-color: coral;
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 准备好好一个“容器” -->
+    <div id="test">
+
+    </div>
+
+    <!-- 引入react核心库 -->
+    <script src="../plug/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script src="../plug/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../plug/babel.min.js"></script>
+
+    <script type="text/babel">/*写babel*/
+        const myId = "AbCdE666"
+        const myData = "hello!ReaCt~"
+        // 1.创建虚拟DOM
+        const VDOM = (
+            <div>
+                <h1 className="tittle" id={myId}>
+                    <span style={{ color: 'white', fontSize: "50px" }}>{myData.toLocaleLowerCase()}</span>
+                </h1>
+                <input type="text"/>
+                <Good>123</Good>
+            </div>
+
+        )
+        // 2.渲染虚拟DOM到页面
+        ReactDOM.render(VDOM, document.getElementById("test"))
+        /*
+            jsx基本语法规则:
+                1.定义虚拟DOM不用双引号
+                2.标签引入变量时,使用单层大括号
+                3.样式的类名指定不要用class,要用className (这样做是为了避开ES6中新增的class关键字)
+                4.内联样式要用双括号style={{key:value}}的格式, 其中多单词的key用小驼峰来声明,比如 font-size --> fontSize
+                5.定义一个虚拟dom,最外层只能有一个根标签,和vue的组件component相同
+                6.标签必须闭合
+                7.标签首字母:
+                    (1).若小写字母开头, 则将该标签转为html中同名的元素, 若html没有这个元素,控制台报错
+                    (2).若大写字母开头, 则尝试渲染这个组件, 如果没有找到该组件的定义,则报错
+        */
+    </script>
+</body>
+
+</html>

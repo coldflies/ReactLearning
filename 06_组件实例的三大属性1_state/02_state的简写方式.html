@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jsx的语法规则</title>
+    <style>
+        h1.tittle {
+            background-color: coral;
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 准备好好一个“容器” -->
+    <div id="test">
+
+    </div>
+
+    <!-- 引入react核心库 -->
+    <script src="../plug/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script src="../plug/react-dom.development.js"></script>
+    <!-- 引入babel，用于将jsx转为js -->
+    <script src="../plug/babel.min.js"></script>
+
+    <script type="text/babel">/*写babel*/
+
+        class Weather extends React.Component{   
+            state = {
+                    cen:31,
+                    address:"北京",
+                    weather:"晴",
+                    type:"weatherforcast"
+            }
+
+            render(){
+                let {cen,address,weather,type} = this.state
+                return <h2 onClick={this.changeWeather}>{address} 天气:{weather} 气温:{cen}℃ </h2>
+            }
+
+            changeWeather = ()=>{
+                const ads = this.state.address
+                if(ads == "北京"){
+                    this.setState({address:"天津"})
+                }else{
+                    this.setState({address:"北京"})
+                }
+            }
+        }
+
+        ReactDOM.render(<Weather/>,document.getElementById("test"))
+
+    </script>
+</body>
+
+</html>

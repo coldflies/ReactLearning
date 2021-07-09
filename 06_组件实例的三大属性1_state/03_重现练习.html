@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test">
+
+    </div>
+
+    <script src="../plug/react.development.js"></script>
+    <script src="../plug/react-dom.development.js"></script>
+    <script src="../plug/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Weather extends React.Component {
+            constructor(props){
+                super(props)
+                this.state = {weather:"晴",address:"北京",cen:31}
+                this.newDefined = this.changeContent.bind(this)
+            }
+
+            render(){
+                let {weather,address,cen} = this.state
+                return <h2 onClick={this.newDefined}>阿巴阿巴{weather+address+cen}</h2>
+            }
+            changeContent(){
+                let {address} = this.state;
+                // console.log(this.state);
+                if(address == "北京"){
+                    this.setState({address:"天津"})
+                }else{
+                    this.setState({address:"北京"})
+                }
+            }
+        }
+
+        ReactDOM.render(<Weather/>,document.getElementById("test"))
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test">
+
+    </div>
+    <script src="../plug/react.development.js"></script>
+    <script src="../plug/react-dom.development.js"></script>
+    <script src="../plug/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Person extends React.Component{
+            constructor(props){
+                super(props)
+                this.state = {
+                    state:'吃饭',
+                    age:18,
+                    sex:"畒",
+                    name:"PW"
+                }
+                this.setPerson = this.changePerson.bind(this);
+                
+            }
+
+            render(){
+                let {state,age,sex,name} = this.state
+                return <div>
+                    <h2>姓名{name},正在{state}</h2>
+                    <button onClick={this.setPerson}>点我改变状态</button>
+                </div>
+            }
+            changePerson(){
+                console.log(this.state);
+                if(this.state.state == "吃饭"){
+                    this.setState({state:"睡觉"})
+                }else{
+                    this.setState({state:"吃饭"})
+                }
+            }
+        }
+
+        ReactDOM.render(<Person/>,document.getElementById("test"))
+    </script>
+</body>
+</html>
